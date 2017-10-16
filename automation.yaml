@@ -1,0 +1,217 @@
+###########################################################
+#
+# Automations - automations.yaml
+#
+###########################################################
+
+
+- alias: 'Turn on the lights when the sun sets'
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "-00:45:00"
+  condition:
+    condition: and
+    conditions:
+      - condition: numeric_state
+        entity_id: 'sensor.Motoz_orientation'
+        below: '1'
+      - condition: state
+        entity_id: group.all_devices
+        state: 'home'
+  action:
+    service: homeassistant.turn_on
+    entity_id: 'switch.ikea_lamp'
+
+
+###########################################################
+#
+# Presence based automations
+#
+###########################################################
+
+
+- alias: 'Welcome Home evenings'
+  trigger:
+    platform: state
+    entity_id: group.all_devices
+    from: 'not_home'
+    to: 'home'
+    for:
+      minutes: 1
+  condition:
+    condition: sun
+    after: sunset
+    after_offset: "-00:45:00"
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.ikea_lamp
+    
+- alias: 'Motoz home zone leave test'
+  trigger:
+    platform: zone
+    entity_id: device_tracker.motoz
+    zone: zone.home
+    event: leave
+  action:
+    service: script.zanzito_send_notification
+    data:
+      dest_id: '6272b1f8e7150a5'
+      message: 'See you later'
+
+- alias: 'Motoz home zone arrive test'
+  trigger:
+    platform: zone
+    entity_id: device_tracker.motoz
+    zone: zone.home
+    event: enter
+  action:
+    service: script.zanzito_send_notification
+    data:
+      dest_id: '6272b1f8e7150a5'
+      message: 'Welcome home'
+      
+- alias: 'Motog home zone leave test'
+  trigger:
+    platform: zone
+    entity_id: device_tracker.motog
+    zone: zone.home
+    event: leave
+  action:
+    service: script.zanzito_send_notification
+    data:
+      dest_id: '976607fbc133630'
+      message: 'See you later, have a nice day'
+
+- alias: 'Motog home zone arrive test'
+  trigger:
+    platform: zone
+    entity_id: device_tracker.motog
+    zone: zone.home
+    event: enter
+  action:
+    service: script.zanzito_send_notification
+    data:
+      dest_id: '976607fbc133630'
+      message: 'Welcome home'
+
+- alias: 'Motog left work'
+  trigger:
+    platform: zone
+    entity_id: device_tracker.motog
+    zone: zone.jewels
+    event: leave
+  condition:
+    condition: time
+    after: '17:30:00'
+    weekday:
+      - wed
+      - fri
+      - sat
+      - sun
+  action:
+    service: script.zanzito_send_notification
+    data:
+      dest_id: '6272b1f8e7150a5'
+      message: 'Cutie is leaving work'
+
+- alias: 'Motoz left work'
+  trigger:
+    platform: zone
+    entity_id: device_tracker.motoz
+    zone: zone.mah
+    event: leave
+  condition:
+    condition: time
+    after: '05:00:00'
+  action:
+    service: script.zanzito_send_notification
+    data:
+      dest_id: '976607fbc133630'
+      message: 'Mr is leaving work'
+      
+      
+###########################################################
+#
+# Zanzito voice control automations
+#
+###########################################################
+
+
+- alias: 'MQTT Get States - Sensors'
+  trigger:
+    platform: mqtt
+    topic: +/getstates/sensor
+  action:
+    service: mqtt.publish
+    data_template:
+      topic: >-
+        zanzito/{{ trigger.topic.split('/')[-3] }}/notification
+      payload: >-
+        {{ states('sensor.' ~ trigger.payload ~ '') }}
+        
+- alias: 'Zanzito on/off'
+  trigger:
+    - platform: mqtt
+      topic: 6272b1f8e7150a5/switch/#
+    - platform: mqtt
+      topic: 976607fbc133630/switch/#
+    # - platform: mqtt
+      # topic: livingroom/switch/#
+    # - platform: mqtt
+      # topic: bedroom/switch/#
+  action:
+    - service_template: >
+        homeassistant.{{ trigger.topic.split('/')[-1] }}
+      data_template:
+        entity_id: >
+          {% set payload = trigger.payload %}
+          
+          {% if payload == "everything" %}
+            group.all_items
+            
+          {% elif payload == "bedroom lights" %}
+            group.bed_room_lights
+            
+          {% elif payload == "the bedroom" %}
+            group.bed_room
+            
+          {% elif payload == "emby" %}
+            script.play_emby
+            
+          {% elif payload == "the news" %}
+            script.play_news
+
+          {%- endif %}
+    - service: mqtt.publish
+      data_template:
+        topic: >-
+          zanzito/{{ trigger.topic.split('/')[-3] }}/notification
+        payload: >-
+          {% set payload = trigger.payload %}
+          {%- if 
+            payload == "everything" or
+            payload == "bed room" or
+            payload == "bedroom" or
+            payload == "living room lights"
+          -%}
+            {% set responses = [
+            "OK",
+            "Sure",
+            "If you insist",
+            "Done",
+            "Alright",
+            "No worries",
+            "I can do that",
+            "Leave it to me",
+            "Consider it done",
+            "As you wish",
+            "By your command",
+            "Affirmative",
+            "No Problem"
+            ] %}
+            {% set rindex =  (range(0, (responses | length - 1) )|random) -%}
+            {{responses[rindex]}}
+          {%- else -%}
+            "I'm sorry. I cannot find the device named {{payload}} in the house."
+          {% endif %}

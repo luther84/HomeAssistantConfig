@@ -1,0 +1,37 @@
+########################################################### 
+#
+# customize.yaml
+#
+###########################################################
+
+
+switch.tv_onoff:
+  friendly_name: "TV Power"
+  icon: mdi:television-classic
+  
+switch.stereo_onoff:
+  friendly_name: "Stereo Power"
+  icon: mdi:speaker
+
+sensor.yr_symbol:
+  friendly_name: Weather
+
+sensor.yr_temperature:
+  friendly_name: Temp
+  
+group.bed_room_lights:
+  friendly_name: Bedroom lights
+  hidden: True
+  
+group.tv:
+  friendly_name: TV
+  hidden: True
+  
+sensor.motoz_orientation:
+  hidden: True
+  
+script.zanzito_send_notification:
+  hidden: True
+  
+# group.motog_location:
+  # hidden: True

@@ -1,0 +1,42 @@
+###########################################################
+# 
+# Sensors sensors.yaml
+#
+###########################################################
+
+
+- platform: steam_online
+  api_key: !secret secret_steam_api
+  accounts:
+    - !secret secret_steam_account
+
+
+########################################################### 
+#
+# weather
+#
+###########################################################
+
+
+- platform: yr
+  monitored_conditions:
+    - symbol     
+    - temperature
+
+
+###########################################################
+#
+# Zanzito voice commands plus
+#
+###########################################################
+
+        
+- platform: mqtt
+  state_topic: "zanzito/6272b1f8e7150a5/flat_down"
+  name: "Motoz orientation"
+  value_template: '{{ value_json.value0 }}'
+  
+- platform: mqtt
+  state_topic: "zanzito/6272b1f8e7150a5/battery_level"
+  name: "Motoz Battery"
+  unit_of_measurement: '%'

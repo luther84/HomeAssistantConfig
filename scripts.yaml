@@ -1,0 +1,118 @@
+###########################################################
+#
+# Scripts - scripts.yaml
+#
+###########################################################
+
+
+zanzito_send_notification:
+  alias: Send notification to Zanzito
+  sequence:
+    service: mqtt.publish
+    data_template:
+      topic: 'zanzito/{{ dest_id }}/notification'
+      payload: '{{ message }}'
+      qos: 1
+      retain: 0
+
+
+###########################################################
+#
+# Living Room TV Controls
+#
+###########################################################
+
+
+tv_power_on:
+  sequence:
+    - service: broadlink.send_packet_192_168_42_12
+      data:
+        packet:
+          - "JgDSAJSUEzcSNxM3EhISExISEhMSEhI3EzcSOBISEhISExISEhITNxISEhMROBI4EhISExE4EhMROBI4EhISEhI4EjgSEhIABgCUlBI3EzcSOBISEhISExISEhISOBI3EzcSEhITEhISExISEjcTEhISEjgSNxITERMSOBISEjcSOBISExISNxI4EhISAAYAlJQSOBI3EzcSEhITEhISEhITEjcSOBI3ExISEhITERMSEhI4EhISExE4EjgSEhISEjgSEhI4EjcTEhISEjgSNxITEgANBQAAAAAAAA=="
+          
+tv_power_off:
+  sequence:
+    - service: broadlink.send_packet_192_168_42_12
+      data:
+        packet:
+          - "JgDSAJaUEzYTNxI4EhISEhMSERMRExI4EjgSNxMSEBQSEhITEBQRExITERMRNhU3EhMQFBI3EzcSOBM2EhMRExI3EjgSEhIABgCUlBI4EzYUNhITERMSEhITEBQSNxM3EjgTERISEhMRExISERQRExISEjgSOBMRERMRORI3EzcTNxETERMRORI3ExISAAYAlJQTNhI4EzYUERISEhMRExISEjgSNxM3EhISExETEhITEhETEhMRExI3EjgTERITETgSOBI3EzcSEhITETgTNxISEgANBQAAAAAAAA=="
+
+tv_input_hdmi1:
+  sequence:
+    - service: broadlink.send_packet_192_168_42_12
+      data:
+        packet:
+          - "JgBGAJWWETkRORM4ERQQFBATEhMRFA86ETkSORMRERQQFBAVEBUOOhETEhQQORITDzsRORI4ERQQORI5ERMROREUERQQFBEADQUAAA=="
+          
+tv_input_hdmi2:
+  sequence:
+    - service: broadlink.send_packet_192_168_42_12
+      data:
+        packet:
+          - "JgBGAJWWETkRORI5ERQQFBAUERQQExE6ETkSOBETERQQFg8UEBQQExI5ETkRORE5EjkSExE4EToQFBEUEBQREhITEjkQFBEADQUAAA=="
+          
+tv_input_av1:
+  sequence:
+    - service: broadlink.send_packet_192_168_42_12
+      data:
+        packet:
+          - "JgBGAJSWEjkROhA6EBQRExIUDxQQFBE6ETgSORETERYOExEUERMRFBAUEDkSFBETEBQQFBE4EjkSORESEjkRORE6EDkSExMADQUAAA=="
+          
+###########################################################
+#
+# Stereo Controls
+#
+###########################################################
+
+
+stereo_power:
+  sequence:
+    - service: broadlink.send_packet_192_168_42_12
+      data:
+        packet:
+          - "JgBwAAABFYsRNBA1ERIQExEREjQQEhE0EjQRNBE0ERIRNBIREBMREREAAqUQNRA2EBIREhIREDUREhA1EDURNRA1EBMQNRASERISERAAApgSNBA1ERIQEhESEDUSERA1ETQSNBA1ERIQNRATEBIREhAADQUAAAAAAAAAAA=="
+          
+
+###########################################################
+#
+# TV Combo scripts
+#
+###########################################################
+
+
+play_emby:
+  sequence:
+    - service: switch.turn_on
+      entity_id: switch.tv_onoff
+    - service: switch.turn_on
+      entity_id: switch.stereo_onoff
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.roku_5s56ae167930
+        source: 'Emby'
+    - service: script.turn_on
+      entity_id: script.tv_input_hdmi1
+        
+play_news:
+  sequence:
+    - service: switch.turn_on
+      entity_id: switch.tv_onoff
+    - service: switch.turn_on
+      entity_id: switch.stereo_onoff
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.roku_5s56ae167930
+        source: 'NBC News'
+    - service: script.turn_on
+      entity_id: script.tv_input_hdmi1
+      
+entertainment_off:
+  sequence:
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.roku_5s56ae167930
+        source: 'Home'
+    - service: switch.turn_off
+      entity_id: switch.tv_onoff
+    - service: switch.turn_off
+      entity_id: switch.stereo_onoff

@@ -1,0 +1,18 @@
+###########################################################
+#
+# Media Players - media_players.yaml
+#
+###########################################################
+
+- platform: emby
+  host: !secret secret_emby_host
+  api_key: !secret secret_emby_api_key
+  auto_hide: True
+
+- platform: roku
+  host: !secret secret_roku_host
+
+- platform: squeezebox
+  host: !secret secret_squeezebox_host
+  username: !secret secret_squeezebox_username
+  password: !secret secret_squeezebox_password

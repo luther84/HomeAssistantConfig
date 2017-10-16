@@ -1,0 +1,81 @@
+###########################################################
+#
+#  Switches - switches.yaml
+#
+###########################################################
+
+
+###########################################################
+#
+#  Broadlink
+#
+###########################################################
+
+
+- platform: broadlink
+  name: living_room
+  host: 192.168.42.12
+  mac: '34:ea:34:bb:0e:88'
+  friendly_name: "Living Room Broadlink"
+  switches:
+    tv:
+      friendly_name: "TV On/Off"
+      command_on: 'JgDSAJSUEzcSNxM3EhISExISEhMSEhI3EzcSOBISEhISExISEhITNxISEhMROBI4EhISExE4EhMROBI4EhISEhI4EjgSEhIABgCUlBI3EzcSOBISEhISExISEhISOBI3EzcSEhITEhISExISEjcTEhISEjgSNxITERMSOBISEjcSOBISExISNxI4EhISAAYAlJQSOBI3EzcSEhITEhISEhITEjcSOBI3ExISEhITERMSEhI4EhISExE4EjgSEhISEjgSEhI4EjcTEhISEjgSNxITEgANBQAAAAAAAA=='
+      command_off: 'JgDSAJaUEzYTNxI4EhISEhMSERMRExI4EjgSNxMSEBQSEhITEBQRExITERMRNhU3EhMQFBI3EzcSOBM2EhMRExI3EjgSEhIABgCUlBI4EzYUNhITERMSEhITEBQSNxM3EjgTERISEhMRExISERQRExISEjgSOBMRERMRORI3EzcTNxETERMRORI3ExISAAYAlJQTNhI4EzYUERISEhMRExISEjgSNxM3EhISExETEhITEhETEhMRExI3EjgTERITETgSOBI3EzcSEhITETgTNxISEgANBQAAAAAAAA=='
+    stereo:
+      friendly_name: "Stereo On/Off"
+      command_on: 'JgBwAAABFYsRNBA1ERIQExEREjQQEhE0EjQRNBE0ERIRNBIREBMREREAAqUQNRA2EBIREhIREDUREhA1EDURNRA1EBMQNRASERISERAAApgSNBA1ERIQEhESEDUSERA1ETQSNBA1ERIQNRATEBIREhAADQUAAAAAAAAAAA=='
+      command_off: 'JgBwAAABFYsRNBA1ERIQExEREjQQEhE0EjQRNBE0ERIRNBIREBMREREAAqUQNRA2EBIREhIREDUREhA1EDURNRA1EBMQNRASERISERAAApgSNBA1ERIQEhESEDUSERA1ETQSNBA1ERIQNRATEBIREhAADQUAAAAAAAAAAA=='
+
+      
+###########################################################
+#
+#  Sonoffs
+#
+###########################################################      
+
+  
+#- platform: mqtt
+#  name: ""
+#  command_topic: "cmnd/sonoff/power"
+#  state_topic: "stat/sonoff/POWER"
+#  qos: 1
+#  payload_on: "ON"
+#  payload_off: "OFF"
+#  retain: true
+
+- platform: mqtt
+  name: "Bedroom Fan"
+  command_topic: "cmnd/sonoff1/power"
+  state_topic: "stat/sonoff1/POWER"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true
+  
+# - platform: mqtt
+  # name: ""
+  # command_topic: "cmnd/sonoff2/power"
+  # state_topic: "stat/sonoff2/POWER"
+  # qos: 1
+  # payload_on: "ON"
+  # payload_off: "OFF"
+  # retain: true
+  
+- platform: mqtt
+  name: "Ikea Lamp"
+  command_topic: "cmnd/sonoff3/power"
+  state_topic: "stat/sonoff3/POWER"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true
+
+- platform: mqtt
+  name: "Desk Lamp"
+  command_topic: "cmnd/sonoff4/power"
+  state_topic: "stat/sonoff4/POWER"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true

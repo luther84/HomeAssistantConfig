@@ -1,0 +1,42 @@
+###########################################################
+# 
+# Groups - groups.yaml
+#
+###########################################################
+
+
+bed_room_lights: switch.ikea_lamp, switch.bubble_lamp
+
+bed_room:
+  name: "Bedroom"
+  control: hidden
+  icon: mdi:hotel
+  entities:
+    - switch.ikea_lamp
+    - light.bubble_lamp
+    - switch.bedroom_fan
+
+living_room:
+  name: "Living Room"
+  control: hidden
+  entities:
+    - light.leaf_lamp
+    - light.grey_ikea_lamp
+    - switch.desk_lamp
+    - switch.tv_onoff
+    - switch.stereo_onoff
+      
+tv:
+  name: "TV"
+  entities:
+    - script.tv_power_on
+    - script.tv_power_off
+    - script.tv_input_hdmi1
+    - script.tv_input_hdmi2
+    - script.tv_input_av1
+    
+# motog_location:
+  # name: !secret secret_name_2
+  # entities:
+    # - device_tracker.motog
+    # - device_tracker.motog_snmp
