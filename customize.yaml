@@ -5,13 +5,6 @@
 ###########################################################
 
 
-switch.tv_onoff:
-  friendly_name: "TV Power"
-  icon: mdi:television-classic
-  
-switch.stereo_onoff:
-  friendly_name: "Stereo Power"
-  icon: mdi:speaker
 
 sensor.yr_symbol:
   friendly_name: Weather
@@ -19,19 +12,100 @@ sensor.yr_symbol:
 sensor.yr_temperature:
   friendly_name: Temp
   
-group.bed_room_lights:
-  friendly_name: Bedroom lights
+binary_sensor.motoz_orientation:
   hidden: True
   
-group.tv:
-  friendly_name: TV
-  hidden: True
-  
-sensor.motoz_orientation:
-  hidden: True
+media_player.roku_5s56ae167930:
+  google_assistant_name: Roku
+
+
+###########################################################
+#
+# Scripts
+#
+###########################################################  
+
   
 script.zanzito_send_notification:
   hidden: True
   
-# group.motog_location:
-  # hidden: True
+script.play_emby:
+  google_assistant: True
+  google_assistant_name: emby
+    
+script.play_news:
+  google_assistant: True
+  google_assistant_name: news
+  
+  
+###########################################################
+#
+# Switches
+#
+###########################################################  
+
+  
+switch.tv_onoff:
+  friendly_name: "TV Power"
+  icon: mdi:television-classic
+  google_assistant_name: tv
+  
+switch.stereo_onoff:
+  friendly_name: "Stereo Power"
+  icon: mdi:speaker
+  google_assistant_name: stereo
+
+switch.desk_lamp:
+  google_assistant_type: light
+
+switch.ikea_lamp:
+  google_assistant_type: light
+  aliases:
+    - Erics lamp
+    - tall bedroom lamp
+  
+  
+###########################################################
+#
+# Lights
+#
+###########################################################  
+
+
+light.bubble_lamp:
+  aliases:
+    - Sarahs lamp
+    
+light.grey_ikea_lamp:
+  aliases:
+    - tall living room lamp
+    - ikea lamp in the living room
+    
+light.leaf_lamp:
+  aliases:
+    - small living room lamp
+    
+    
+###########################################################
+#
+# Groups
+#
+###########################################################  
+  
+
+group.living_room_lights:
+  friendly_name: "Living Room Lights"
+  hidden: True
+  
+group.bed_room_lights:
+  friendly_name: "Bedroom lights"
+  hidden: True
+
+group.tv:
+  friendly_name: "TV Controls"
+  hidden: True
+  
+group.entertainment_center:
+  friendly_name: "Entertainment Center"
+  hidden: True
+  google_assistant: True

@@ -25,9 +25,16 @@ living_room:
     - switch.desk_lamp
     - switch.tv_onoff
     - switch.stereo_onoff
+    
+living_room_lights:
+  name: "Living Room Lights"
+  entities:
+    - light.leaf_lamp
+    - light.grey_ikea_lamp
+    - switch.desk_lamp
       
 tv:
-  name: "TV"
+  name: "TV Controls"
   entities:
     - script.tv_power_on
     - script.tv_power_off
@@ -35,8 +42,8 @@ tv:
     - script.tv_input_hdmi2
     - script.tv_input_av1
     
-# motog_location:
-  # name: !secret secret_name_2
-  # entities:
-    # - device_tracker.motog
-    # - device_tracker.motog_snmp
+entertainment_center:
+  name: "Entertainment Center"
+  entities:
+    - switch.tv_onoff
+    - switch.stereo_onoff

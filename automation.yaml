@@ -10,18 +10,32 @@
     platform: sun
     event: sunset
     offset: "-00:45:00"
-  condition:
-    condition: and
-    conditions:
-      - condition: numeric_state
-        entity_id: 'sensor.Motoz_orientation'
-        below: '1'
-      - condition: state
-        entity_id: group.all_devices
-        state: 'home'
+  condition: 
+    condition: state
+    entity_id: group.all_devices
+    state: 'home'
   action:
-    service: homeassistant.turn_on
-    entity_id: 'switch.ikea_lamp'
+    - condition: state
+      entity_id: device_tracker.motog
+      state: 'home'
+    - service: light.turn_on
+      data:
+        entity_id: 'group.living_room_lights'
+        brightness_pct: "80"
+        transition: "500"
+    - condition: and
+      conditions:
+        - condition: state
+          entity_id: 'binary_sensor.motoz_orientation'
+          state: 'off'
+        - condition: state
+          entity_id: device_tracker.motoz
+          state: 'home'
+    - service: light.turn_on
+      data:
+        entity_id: 'light.bubble_lamp'
+        brightness_pct: "80"
+        transition: "500"
 
 
 ###########################################################
@@ -44,8 +58,26 @@
     after: sunset
     after_offset: "-00:45:00"
   action:
-    service: homeassistant.turn_on
-    entity_id: switch.ikea_lamp
+    - service: light.turn_on
+      entity_id: light.bubble_lamp
+      data:
+        brightness_pct: "40"
+        transition: "5"
+    - service: light.turn_on
+      entity_id: 
+        - light.leaf_lamp
+        - light.grey_ikea_lamp
+      data:
+        brightness_pct: "70"
+        transition: "5"
+
+
+###########################################################
+#
+#  Presence based notifications
+#
+###########################################################
+
     
 - alias: 'Motoz home zone leave test'
   trigger:

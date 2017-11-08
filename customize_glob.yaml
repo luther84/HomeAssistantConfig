@@ -7,3 +7,6 @@
 
 "script.tv_*":
   hidden: True
+  
+"script.stereo_*":
+  hidden: True

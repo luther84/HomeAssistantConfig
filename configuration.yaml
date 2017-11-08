@@ -60,8 +60,17 @@ mqtt:
 
 tradfri:
   host: !secret tradfri_ip_address
-  api_key: !secret tradfri_api_key
   allow_tradfri_groups: false
+  
+google_assistant:
+  project_id: !secret ga_project_id
+  client_id: !secret ga_client_id
+  access_token: !secret ga_access_token
+  exposed_domains:
+    - switch
+    - light
+    - scene
+  
 
 ###########################################################
 #
@@ -71,6 +80,8 @@ tradfri:
 
 
 zone: !include zones.yaml
+
+binary_sensor: !include binary_sensor.yaml
 
 sensor: !include sensors.yaml
   
