@@ -81,10 +81,12 @@
     
 - alias: 'Motoz home zone leave test'
   trigger:
-    platform: zone
+    platform: state
     entity_id: device_tracker.motoz
-    zone: zone.home
-    event: leave
+    from: 'home'
+    to: 'not_home'
+    for:
+      minutes: 1
   action:
     service: script.zanzito_send_notification
     data:
@@ -93,10 +95,12 @@
 
 - alias: 'Motoz home zone arrive test'
   trigger:
-    platform: zone
+    platform: state
     entity_id: device_tracker.motoz
-    zone: zone.home
-    event: enter
+    from: 'not_home'
+    to: 'home'
+    for:
+      minutes: 1
   action:
     service: script.zanzito_send_notification
     data:
@@ -105,10 +109,12 @@
       
 - alias: 'Motog home zone leave test'
   trigger:
-    platform: zone
+    platform: state
     entity_id: device_tracker.motog
-    zone: zone.home
-    event: leave
+    from: 'home'
+    to: 'not_home'
+    for:
+      minutes: 1
   action:
     service: script.zanzito_send_notification
     data:
@@ -117,10 +123,12 @@
 
 - alias: 'Motog home zone arrive test'
   trigger:
-    platform: zone
+    platform: state
     entity_id: device_tracker.motog
-    zone: zone.home
-    event: enter
+    from: 'not_home'
+    to: 'home'
+    for:
+      minutes: 1
   action:
     service: script.zanzito_send_notification
     data:
