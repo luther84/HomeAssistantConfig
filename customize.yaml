@@ -16,6 +16,7 @@ binary_sensor.motoz_orientation:
   hidden: True
   
 media_player.roku_5s56ae167930:
+  google_assistant: True
   google_assistant_name: Roku
 
 
@@ -86,6 +87,14 @@ light.leaf_lamp:
     - small living room lamp
     
     
+###########################################################
+#
+# Media Players
+#
+###########################################################  
+
+
+media_player
 ###########################################################
 #
 # Groups
