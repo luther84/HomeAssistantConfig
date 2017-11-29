@@ -35,9 +35,24 @@
       data:
         entity_id: 'light.bubble_lamp'
         brightness_pct: "80"
-        transition: "500"
+        transition: "300"
 
-
+- alias: Eric nightshift wakeup
+  trigger:
+    platform: time
+    at: '20:45:00'
+  condition:
+    condition: state
+    entity_id: 'binary_sensor.motoz_orientation'
+    state: 'on'
+  action:
+    service: light.turn_on
+    data:
+      entity_id: 'light.bubble_lamp'
+      brightness_pct: "80"
+      transition: "300"
+      
+      
 ###########################################################
 #
 # Presence based automations
@@ -159,7 +174,7 @@
   trigger:
     platform: zone
     entity_id: device_tracker.motoz
-    zone: zone.mah
+    zone: zone.work
     event: leave
   condition:
     condition: time
