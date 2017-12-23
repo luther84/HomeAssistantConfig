@@ -1,0 +1,120 @@
+########################################################
+#
+# Scenes - scene.yaml
+#
+########################################################
+
+
+- name: Daytime
+  entities:
+    light.grey_ikea_lamp:
+      state: on
+      transition: "120"
+      brightness_pct: "80"
+      color_temp: "390"
+    light.leaf_lamp:
+      state: on
+      transition: "120"
+      brightness_pct: "90"
+      color_temp: "390"
+    light.bubble_lamp:
+      state: on
+      transition: "120"
+      brightness_pct: "50"
+      color_temp: "390"
+    switch.christmas_lights:
+      state: on
+    switch.ikea_lamp:
+      state: off
+    switch.desk_lamp:
+      state: off
+      
+- name: Evenings
+  entities:
+    light.grey_ikea_lamp:
+      state: on
+      transition: "120"
+      brightness_pct: "65"
+      color_temp: "430"
+    light.leaf_lamp:
+      state: on
+      transition: "120"
+      brightness_pct: "80"
+      color_temp: "440"
+    light.bubble_lamp:
+      state: on
+      transition: "120"
+      brightness_pct: "50"
+      color_temp: "430"
+    switch.christmas_lights:
+      state: on
+    switch.ikea_lamp:
+      state: off
+    switch.desk_lamp:
+      state: off
+      
+- name: Evenings_quick
+  entities:
+    light.grey_ikea_lamp:
+      state: on
+      transition: "5"
+      brightness_pct: "65"
+      color_temp: "430"
+    light.leaf_lamp:
+      state: on
+      transition: "5"
+      brightness_pct: "80"
+      color_temp: "440"
+    light.bubble_lamp:
+      state: on
+      transition: "5"
+      brightness_pct: "50"
+      color_temp: "430"
+    switch.christmas_lights:
+      state: on
+    switch.ikea_lamp:
+      state: off
+    switch.desk_lamp:
+      state: off
+
+- name: Romantic
+  entities:
+    light.grey_ikea_lamp:
+      state: off
+    light.leaf_lamp:
+      state: on
+      transition: "80"
+      brightness_pct: "80"
+      color_temp: "440"
+    light.bubble_lamp:
+      state: on
+      transition: "60"
+      brightness_pct: "50"
+      color_temp: "430"
+    switch.christmas_lights:
+      state: on
+    switch.ikea_lamp:
+      state: off
+    switch.desk_lamp:
+      state: off
+
+- name: Movie
+  entities:
+    light.grey_ikea_lamp:
+      state: off
+    light.leaf_lamp:
+      state: on
+      transition: "60"
+      brightness_pct: "80"
+      color_temp: "440"
+    light.bubble_lamp:
+      state: on
+      transition: "60"
+      brightness_pct: "50"
+      color_temp: "430"
+    switch.christmas_lights:
+      state: on
+    switch.ikea_lamp:
+      state: off
+    switch.desk_lamp:
+      state: off
