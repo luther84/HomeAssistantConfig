@@ -22,6 +22,7 @@ living_room:
   entities:
     - light.leaf_lamp
     - light.grey_ikea_lamp
+    - switch.christmas_lights
     - switch.desk_lamp
     - switch.tv_onoff
     - switch.stereo_onoff

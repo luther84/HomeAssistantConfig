@@ -60,6 +60,10 @@ switch.ikea_lamp:
   aliases:
     - Erics lamp
     - tall bedroom lamp
+    
+switch.christmas_lights:
+  icon: mdi:pine-tree
+  google_assistant_type: light
   
   
 ###########################################################
@@ -88,11 +92,6 @@ light.leaf_lamp:
 # Media Players
 #
 ###########################################################  
-
-
-media_player.roku_5s56ae167930:
-  google_assistant: True
-  google_assistant_name: Roku
   
 
 ###########################################################

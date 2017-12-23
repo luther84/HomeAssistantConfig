@@ -9,48 +9,35 @@
   trigger:
     platform: sun
     event: sunset
-    offset: "-00:45:00"
+    offset: "-01:30:00"
   condition: 
     condition: state
     entity_id: group.all_devices
     state: 'home'
   action:
-    - condition: state
-      entity_id: device_tracker.motog
-      state: 'home'
-    - service: light.turn_on
-      data:
-        entity_id: 'group.living_room_lights'
-        brightness_pct: "80"
-        transition: "500"
-    - condition: and
-      conditions:
-        - condition: state
-          entity_id: 'binary_sensor.motoz_orientation'
-          state: 'off'
-        - condition: state
-          entity_id: device_tracker.motoz
-          state: 'home'
     - service: light.turn_on
       data:
         entity_id: 'light.bubble_lamp'
         brightness_pct: "80"
         transition: "300"
-
-- alias: Eric nightshift wakeup
-  trigger:
-    platform: time
-    at: '20:45:00'
-  condition:
-    condition: state
-    entity_id: 'binary_sensor.motoz_orientation'
-    state: 'on'
-  action:
-    service: light.turn_on
-    data:
-      entity_id: 'light.bubble_lamp'
-      brightness_pct: "80"
-      transition: "300"
+    - service: light.turn_on
+      data:
+        entity_id: 'light.grey_ikea_lamp'
+        transition: "120"
+        brightness_pct: "80"
+        color_temp: "390"
+    - service: light.turn_on
+      data:
+        entity_id: 'light.leaf_lamp'
+        transition: "120"
+        brightness_pct: "90"
+        color_temp: "390"
+    - service: light.turn_on
+      data:
+        entity_id: 'light.bubble_lamp'
+        transition: "120"
+        brightness_pct: "50"
+        color_temp: "390"
       
       
 ###########################################################
@@ -85,6 +72,8 @@
       data:
         brightness_pct: "70"
         transition: "5"
+    - service: switch.turn_on
+      entity_id: switch.christmas_lights
 
 
 ###########################################################
@@ -176,9 +165,6 @@
     entity_id: device_tracker.motoz
     zone: zone.work
     event: leave
-  condition:
-    condition: time
-    after: '05:00:00'
   action:
     service: script.zanzito_send_notification
     data:

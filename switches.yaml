@@ -45,7 +45,7 @@
 #  retain: true
 
 - platform: mqtt
-  name: "Bedroom Fan"
+  name: "Christmas Lights"
   command_topic: "cmnd/sonoff1/power"
   state_topic: "stat/sonoff1/POWER"
   qos: 1
